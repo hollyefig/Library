@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <!-- stylesheet  -->
+    <link rel="stylesheet" href="style.css">
+    <!-- display font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <!-- open sans  -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- google icons  -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+</head>
+<body>
+
+    <!-- form pop up  -->
+    <div class="popWindow display">
+        <div class="popWindowWrapper">
+        <div class="closeButton" onclick="closeWindow()">Close Window</div>
+        <h3>Add A Book</h3>
+        <form action="">
+        <fieldset>
+
+            <div>
+                <input type="text" id="bookName" name="library" value="" class="textInput" onchange="textentered(this)" required autofocus />
+                <label for="bookName" class="labels">Book Name</label>
+            </div>
+            
+            <div>
+                <input type="text" id="author" name="library" value="" class="textInput" onchange="textentered(this)" required />
+                <label for="author" class="labels">Book Author</label>
+            </div>
+            
+            <div>
+                <input type="number" id="pages" name="library" min="0" value="" class="textInput" onchange="textentered(this)" required />
+                <label for="pages" class="labels">Pages</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="library" id="readCheck" onclick="readClicked()" />
+                <label for="readcheck" class="readCheckLabel"></label>
+            </div>
+
+            <div>
+            <button type="submit" onclick="addBook()" class="submitButton">Add</button>
+            </div>
+        </fieldset>
+        </form>
+    </div>
+    </div>
+
+    <div class="wrapper">
+
+        <!-- top bar  -->
+        <div class="top">
+        <div class="title">
+            <span class="material-symbols-outlined">
+                library_books
+            </span>
+            <h1>
+                My Library
+            </h1>
+        </div>
+        <div class="addBook">
+            <button type="button" class="addBookButton" onclick="formPopUp()">
+                <span class="material-symbols-outlined">
+                    add_circle
+                </span>
+                <span>
+                    Add Book
+                </span>
+            </button>
+            
+        </div>
+        <div class="themeSwitch">
+            <div class="switchWrapper">
+                <div class="switchButton" onclick="themeChange(this)"></div>
+                <div class="switchBg">
+                    <span class="material-symbols-outlined">
+                        dark_mode
+                    </span>
+                    <span class="material-symbols-outlined">
+                        light_mode
+                    </span>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    <!-- bottom section  -->
+    <div class="bottom">
+        <div class="bookShelf">
+
+        </div>
+    </div>
+
+<!-- end wrapper  -->
+</div>
+
+    
+</body>
+
+<script src="script.js"></script>
+</html>
