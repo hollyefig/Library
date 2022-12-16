@@ -42,12 +42,17 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     overflow-x: hidden;
+    position: relative;
 }
 
 /* top bar  */
 
 .top {
     position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -o-sticky;
+    position: -ms-sticky;
     top:0px;
     z-index: 4;
     color:var(--text-color);
