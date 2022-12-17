@@ -38,8 +38,7 @@ const closeWindow = () => {
   doc.classList.remove("noScroll");
   popWindow.classList.add("display");
 
-  const blurBg = document.querySelector(".blurBg");
-  wrapper.removeChild(blurBg);
+  wrapper.removeChild(document.querySelector(".blurBg"));
 };
 
 doc.addEventListener("keydown", (e) => {

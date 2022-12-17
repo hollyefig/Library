@@ -123,6 +123,8 @@ body {
     overflow: hidden;
 }
 
+/* pop up window  */
+
 .popWindow {
     --width: 425px;
     --height: 445px;
@@ -229,6 +231,13 @@ body {
 .popWindow .labelSmall {
     top:12px;
     font-size: 10px;
+}
+
+.popWindow input[type='checkbox'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
 }
 
 .popWindow #readCheck {
