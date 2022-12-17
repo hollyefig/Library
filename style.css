@@ -254,7 +254,9 @@ body {
     cursor: pointer;
     padding: 0.8em 0.3em;
     display: flex;
-    width: 37px;
+    align-items: center;
+    width: 30px;
+    height: 30px;
     /* border-radius: 20px; */
     border-radius: 0px;
 }
