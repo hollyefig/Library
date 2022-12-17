@@ -30,13 +30,13 @@ const formPopUp = () => {
   blurBg.setAttribute("onclick", "closeWindow()");
   wrapper.appendChild(blurBg);
 
-  popWindow.classList.remove("display");
+  popWindow.classList.add("display");
 };
 
 const closeWindow = () => {
   popupActive = false;
   doc.classList.remove("noScroll");
-  popWindow.classList.add("display");
+  popWindow.classList.remove("display");
 
   wrapper.removeChild(document.querySelector(".blurBg"));
 };
@@ -92,7 +92,8 @@ function newBook(n, a, p, c) {
 const deleteCard = (e) => {
   let i = Number(e.getAttribute("dataindex"));
   bookShelf.removeChild(e.parentNode);
-  myLibrary.splice(i, 1);
+  const filter = myLibrary.filter((obj) => obj.index !== i);
+  myLibrary = filter;
   console.log("updated library", myLibrary);
 };
 
@@ -106,7 +107,7 @@ const addBook = () => {
   );
 
   myLibrary.push(addedBook);
-  let i = myLibrary.length;
+  let i = myLibrary.length - 1;
 
   const bookDiv = document.createElement("div"),
     cardWrapper = document.createElement("div"),
@@ -120,17 +121,18 @@ const addBook = () => {
 
   // set card
   bookDiv.setAttribute("class", "bookCard");
+  bookDiv.setAttribute("dataindex", myLibrary[i].index);
   cardWrapper.setAttribute("class", "cardWrapper");
 
   // card delete button
   cardDelete.setAttribute("class", "cardDelete");
-  cardDelete.setAttribute("dataindex", myLibrary[i - 1].index);
+  cardDelete.setAttribute("dataindex", myLibrary[i].index);
   cardDelete.setAttribute("onclick", "deleteCard(this)");
 
   // set book info
-  cardTitle.textContent = `"${myLibrary[i - 1].addName}"`;
-  cardAuthor.textContent = myLibrary[i - 1].addAuthor;
-  cardPages.textContent = myLibrary[i - 1].addPages;
+  cardTitle.textContent = `"${myLibrary[i].addName}"`;
+  cardAuthor.textContent = myLibrary[i].addAuthor;
+  cardPages.textContent = myLibrary[i].addPages;
   cardDelete.textContent = "x";
 
   //set read or not read
@@ -139,8 +141,8 @@ const addBook = () => {
   displayCheck.setAttribute("onclick", "readClickedDisplay(this)");
   displayLabel.setAttribute("for", "displayCheckbox");
   displayLabel.setAttribute("class", "displayLabel");
-  displayCheck.checked = myLibrary[i - 1].read;
-  myLibrary[i - 1].read === true
+  displayCheck.checked = myLibrary[i].read;
+  myLibrary[i].read === true
     ? (displayLabel.textContent = "Read")
     : (displayLabel.textContent = "Not Read");
 

@@ -140,10 +140,12 @@ body {
     background-color: var(--form-bg-color);
     overflow:hidden;
     font-family: var(--body-font);
+    margin-top: -100vh;
+    transition: margin-top .4s ease-out;
 }
 
 .display {
-    display: none;
+    margin-top: 0px;
 }
 
 .popWindowWrapper {
