@@ -136,9 +136,9 @@ const addBook = () => {
 
   //set read or not read
   displayCheck.setAttribute("type", "checkbox");
-  displayCheck.setAttribute("id", "displayCheckbox");
+  displayCheck.setAttribute("id", `displayCheckbox${i}`);
   displayCheck.setAttribute("onclick", "readClickedDisplay(this)");
-  displayLabel.setAttribute("for", "displayCheckbox");
+  displayLabel.setAttribute("for", `displayCheckbox${i}`);
   displayLabel.setAttribute("class", "displayLabel");
   displayCheck.checked = myLibrary[i].read;
   myLibrary[i].read === true
