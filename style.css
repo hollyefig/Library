@@ -201,6 +201,11 @@ body {
     grid-column: 1 / 3;
 }
 
+.popWindow fieldset > div:nth-child(4) {
+    display:flex;
+    align-items: center;
+}
+
 .popWindow input {
     width: 100%;
     padding: 1.5em 0.8em 0.8em 0.8em;
@@ -218,6 +223,8 @@ body {
     font-size: 1rem;
     transition: all .1s linear;
 }
+
+
 
 .popWindow input:focus {
     outline: none;
@@ -248,7 +255,8 @@ body {
     padding: 0.8em 0.3em;
     display: flex;
     width: 37px;
-    border-radius: 20px;
+    /* border-radius: 20px; */
+    border-radius: 0px;
 }
 
 .popWindow #readCheck::after {
@@ -261,10 +269,12 @@ body {
     line-height: 16px;
 }
 
-.popWindow .readCheckLabel {
+
+.popWindow fieldset > div:nth-child(4) label {
     color:var(--red-color);
-    width: 70px;
-    left:60px;
+    width: 90px;
+    margin: 0px 0px 0px .5em;
+    position: unset;
 }
 
 .popWindow #readCheck:checked {
@@ -432,7 +442,6 @@ body {
 .cardWrapper > div:nth-child(4) {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    column-gap: 10px;
 }
 
 .cardWrapper > div input[type='checkbox'] {
@@ -441,10 +450,12 @@ body {
     appearance: none;
     outline: none;
     cursor: pointer;
-    padding: 0.7em 0.3em;
     display: flex;
-    width: 37px;
-    border-radius: 20px;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    /* border-radius: 20px; */
+    border-radius: 0px;
     border:1px solid var(--red-color)
 }
 

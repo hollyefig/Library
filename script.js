@@ -90,7 +90,7 @@ function newBook(n, a, p, c) {
 
 // delete card
 const deleteCard = (e) => {
-  let i = Number(e.getAttribute("dataindex"));
+  let i = Number(e.parentNode.getAttribute("dataindex"));
   bookShelf.removeChild(e.parentNode);
   const filter = myLibrary.filter((obj) => obj.index !== i);
   myLibrary = filter;
@@ -126,7 +126,6 @@ const addBook = () => {
 
   // card delete button
   cardDelete.setAttribute("class", "cardDelete");
-  cardDelete.setAttribute("dataindex", myLibrary[i].index);
   cardDelete.setAttribute("onclick", "deleteCard(this)");
 
   // set book info
