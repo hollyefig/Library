@@ -54,17 +54,13 @@ const inputs = document.querySelectorAll(".textInput"),
 
 const textentered = (e) => {
   for (let i = 0; i < inputs.length; i++) {
-    if (e.value !== "" && e.id === labels[i].htmlFor) {
-      labels[i].classList.add("labelSmall");
-    } else {
-      labels[i].classList.remove("labelSmall");
-    }
+    e.value !== "" && e.id === labels[i].htmlFor
+      ? labels[i].classList.add("labelSmall")
+      : labels[i].classList.remove("labelSmall");
 
-    if (inputs[i].value !== "") {
-      labels[i].classList.add("labelSmall");
-    } else {
-      labels[i].classList.remove("labelSmall");
-    }
+    inputs[i].value !== ""
+      ? labels[i].classList.add("labelSmall")
+      : labels[i].classList.remove("labelSmall");
   }
 };
 
@@ -139,18 +135,15 @@ const addBook = () => {
   cardDelete.textContent = "x";
 
   //set read or not read
-  let readBoolean = myLibrary[i - 1].read;
   displayCheck.setAttribute("type", "checkbox");
   displayCheck.setAttribute("id", "displayCheckbox");
   displayCheck.setAttribute("onclick", "readClickedDisplay(this)");
   displayLabel.setAttribute("for", "displayCheckbox");
   displayLabel.setAttribute("class", "displayLabel");
   displayCheck.checked = myLibrary[i - 1].read;
-  if (readBoolean === true) {
-    displayLabel.textContent = "Read";
-  } else {
-    displayLabel.textContent = "Not Read";
-  }
+  myLibrary[i - 1].read === true
+    ? (displayLabel.textContent = "Read")
+    : (displayLabel.textContent = "Not Read");
 
   // append
   bookShelf.appendChild(bookDiv);
