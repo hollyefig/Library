@@ -99,6 +99,7 @@ body {
 
 .addBookButton:hover {
     background-color: var(--highlight-color);
+    color: #fff;
 }
 
 .addBookButton span {
@@ -306,6 +307,7 @@ body {
 
 .popWindow .submitButton:hover {
     background-color: var(--highlight-color);
+    color: #fff;
 }
 
 
@@ -461,6 +463,10 @@ body {
     border:1px solid var(--red-color)
 }
 
+.cardWrapper > div input[type='checkbox'] ~ label {
+    color: var(--red-color);
+}
+
 .cardWrapper > div input[type='checkbox']::after {
     content: 'x';
     display: block;
@@ -479,6 +485,10 @@ body {
 .cardWrapper > div input[type='checkbox']:checked::after {
     content: '✓';
     color:#fff;
+}
+
+.cardWrapper > div input[type='checkbox']:checked ~ label {
+    color: rgb(96, 194, 96);   
 }
 
 @media only screen and (max-width:1024px) {
