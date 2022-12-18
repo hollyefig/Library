@@ -6,9 +6,12 @@ const bookName = document.getElementById("bookName"),
   wrapper = document.querySelector(".wrapper"),
   popWindow = document.querySelector(".popWindow"),
   readCheckLabel = document.querySelector(".readCheckLabel"),
-  checkbox = document.getElementById("readCheck");
+  checkbox = document.getElementById("readCheck"),
+  submitButton = document.querySelector(".submitButton");
 
 let popupActive = false;
+let editActive = false;
+let editIndex = 0;
 
 // theming
 const currentTheme = () => {
@@ -33,6 +36,7 @@ const formPopUp = () => {
   popWindow.classList.add("display");
 };
 
+// close popup
 const closeWindow = () => {
   popupActive = false;
   doc.classList.remove("noScroll");
@@ -50,8 +54,17 @@ doc.addEventListener("keydown", (e) => {
 // form inputs
 const inputs = document.querySelectorAll(".textInput"),
   labels = document.querySelectorAll(".labels");
+submitButton.disabled = true;
 
 const textentered = (e) => {
+  if (
+    inputs[0].value !== "" &&
+    inputs[1].value !== "" &&
+    inputs[2].value !== ""
+  ) {
+    submitButton.disabled = false;
+  }
+
   for (let i = 0; i < inputs.length; i++) {
     e.value !== "" && e.id === labels[i].htmlFor
       ? labels[i].classList.add("labelSmall")
@@ -88,68 +101,107 @@ function newBook(n, a, p, c) {
   this.index = myLibrary.length;
 }
 
+// edit book card
+const cardEdit = (e) => {
+  editActive = true;
+  let i = Number(e.parentNode.parentNode.getAttribute("dataindex"));
+  editIndex = i;
+
+  formPopUp();
+  bookName.value = myLibrary[i].addName;
+  author.value = myLibrary[i].addAuthor;
+  pages.value = myLibrary[i].addPages;
+
+  for (let i = 0; i < inputs.length; i++) {
+    labels[i].classList.add("labelSmall");
+  }
+  submitButton.disabled = false;
+};
+
 // delete card
 const deleteCard = (e) => {
-  let i = Number(e.parentNode.getAttribute("dataindex"));
-  bookShelf.removeChild(e.parentNode);
+  let i = Number(e.parentNode.parentNode.getAttribute("dataindex"));
+  bookShelf.removeChild(e.parentNode.parentNode);
   const filter = myLibrary.filter((obj) => obj.index !== i);
   myLibrary = filter;
-  console.log("updated library", myLibrary);
 };
 
 // adding book
 const addBook = () => {
-  let addedBook = new newBook(
-    bookName.value,
-    author.value,
-    pages.value,
-    checkbox.checked
-  );
+  if (editActive === true) {
+    let newCard = document.querySelectorAll(".bookCard")[editIndex].children[1];
+    myLibrary[editIndex].addName = bookName.value;
+    myLibrary[editIndex].addAuthor = author.value;
+    myLibrary[editIndex].addPages = pages.value;
 
-  myLibrary.push(addedBook);
-  let i = myLibrary.length - 1;
+    newCard.children[0].textContent = myLibrary[editIndex].addName;
+    newCard.children[1].textContent = myLibrary[editIndex].addAuthor;
+    newCard.children[2].textContent = myLibrary[editIndex].addPages;
 
-  const bookDiv = document.createElement("div"),
-    cardWrapper = document.createElement("div"),
-    cardTitle = document.createElement("div"),
-    cardAuthor = document.createElement("div"),
-    cardPages = document.createElement("div"),
-    cardRead = document.createElement("div"),
-    cardDelete = document.createElement("div"),
-    displayCheck = document.createElement("input"),
-    displayLabel = document.createElement("label");
+    editActive = false;
+  } else {
+    let addedBook = new newBook(
+      bookName.value,
+      author.value,
+      pages.value,
+      checkbox.checked
+    );
 
-  // set card
-  bookDiv.setAttribute("class", "bookCard");
-  bookDiv.setAttribute("dataindex", myLibrary[i].index);
-  cardWrapper.setAttribute("class", "cardWrapper");
+    myLibrary.push(addedBook);
+    let i = myLibrary.length - 1;
 
-  // card delete button
-  cardDelete.setAttribute("class", "cardDelete");
-  cardDelete.setAttribute("onclick", "deleteCard(this)");
+    const bookDiv = document.createElement("div"),
+      cardWrapper = document.createElement("div"),
+      cardTitle = document.createElement("div"),
+      cardAuthor = document.createElement("div"),
+      cardPages = document.createElement("div"),
+      cardRead = document.createElement("div"),
+      cardButtons = document.createElement("div"),
+      cardEdit = document.createElement("div"),
+      cardDelete = document.createElement("div"),
+      displayCheck = document.createElement("input"),
+      displayLabel = document.createElement("label");
 
-  // set book info
-  cardTitle.textContent = `"${myLibrary[i].addName}"`;
-  cardAuthor.textContent = myLibrary[i].addAuthor;
-  cardPages.textContent = myLibrary[i].addPages;
-  cardDelete.textContent = "x";
+    // set card
+    bookDiv.setAttribute("class", "bookCard");
+    bookDiv.setAttribute("dataindex", myLibrary[i].index);
+    cardWrapper.setAttribute("class", "cardWrapper");
 
-  //set read or not read
-  displayCheck.setAttribute("type", "checkbox");
-  displayCheck.setAttribute("id", `displayCheckbox${i}`);
-  displayCheck.setAttribute("onclick", "readClickedDisplay(this)");
-  displayLabel.setAttribute("for", `displayCheckbox${i}`);
-  displayLabel.setAttribute("class", "displayLabel");
-  displayCheck.checked = myLibrary[i].read;
-  myLibrary[i].read === true
-    ? (displayLabel.textContent = "Read")
-    : (displayLabel.textContent = "Not Read");
+    // card buttons holder
+    cardButtons.setAttribute("class", "cardButtons");
+    // card edit button
+    cardEdit.setAttribute("class", "cardEdit");
+    cardEdit.setAttribute("class", "material-symbols-outlined");
+    cardEdit.setAttribute("onclick", "cardEdit(this)");
+    // card delete button
+    cardDelete.setAttribute("class", "cardDelete");
+    cardDelete.setAttribute("onclick", "deleteCard(this)");
 
-  // append
-  bookShelf.appendChild(bookDiv);
-  bookDiv.append(cardDelete, cardWrapper);
-  cardWrapper.append(cardTitle, cardAuthor, cardPages, cardRead);
-  cardRead.append(displayCheck, displayLabel);
+    // set book info
+    cardTitle.textContent = `"${myLibrary[i].addName}"`;
+    cardAuthor.textContent = myLibrary[i].addAuthor;
+    cardPages.textContent = myLibrary[i].addPages;
+    cardEdit.textContent = "edit";
+    cardDelete.textContent = "×";
+
+    //set read or not read
+    displayCheck.setAttribute("type", "checkbox");
+    displayCheck.setAttribute("id", `displayCheckbox${i}`);
+    displayCheck.setAttribute("onclick", "readClickedDisplay(this)");
+    displayLabel.setAttribute("for", `displayCheckbox${i}`);
+    displayLabel.setAttribute("class", "displayLabel");
+    displayCheck.checked = myLibrary[i].read;
+    myLibrary[i].read === true
+      ? (displayLabel.textContent = "Read")
+      : (displayLabel.textContent = "Not Read");
+
+    // append
+    bookShelf.appendChild(bookDiv);
+    bookDiv.append(cardButtons, cardWrapper);
+    cardButtons.append(cardEdit, cardDelete);
+    cardWrapper.append(cardTitle, cardAuthor, cardPages, cardRead);
+    cardRead.append(displayCheck, displayLabel);
+  }
 
   bookName.value = "";
   author.value = "";
@@ -159,7 +211,7 @@ const addBook = () => {
     labels[i].classList.remove("labelSmall");
   }
   closeWindow();
-  console.log(myLibrary);
+  submitButton.disabled = true;
 };
 
 // prevent default on submit

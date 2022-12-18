@@ -305,6 +305,16 @@ body {
     line-height: 0px;
 }
 
+.popWindow .submitButton:disabled {
+    background-color: var(--grey);
+}
+
+.popWindow .submitButton:disabled:hover {
+    background-color: var(--grey);
+    color: var(--bg-color);
+    cursor: default;
+}
+
 .popWindow .submitButton:hover {
     background-color: var(--highlight-color);
     color: #fff;
@@ -372,12 +382,26 @@ body {
     padding:1em;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     flex-direction: column;
     border-radius: 20px;
     box-shadow: 1px 1px 8px var(--box-shadow-color);
     position: relative;
     font-family: var(--body-font);
+}
+
+.cardButtons {
+    display: grid;
+    grid-template-columns: repeat(2, 30px);
+    column-gap: 5px;
+    justify-items: center;
+    align-items: center;
+}
+
+.cardButtons .material-symbols-outlined {
+    font-size: 21px;
+    color: var(--grey);
+    cursor: pointer;
 }
 
 .cardDelete {
@@ -391,9 +415,6 @@ body {
     align-items: center;
     font-size: 13px;
     color: var(--red-color);
-    position: absolute;
-    top:5px;
-    right:6px;
 }
 
 .cardWrapper {
@@ -522,9 +543,6 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .cardWrapper > div:first-child {
-        font-size: 1.5rem;
-    }
 }
 
 @media only screen and (max-width:425px) {
