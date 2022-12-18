@@ -446,7 +446,11 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 10px;
-    justify-items: center;
+}
+
+.cardWrapper > div:nth-child(4) input {
+    position: relative;
+    left: calc(100% - 30px);
 }
 
 
