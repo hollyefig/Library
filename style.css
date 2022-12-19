@@ -396,6 +396,15 @@ body {
     column-gap: 5px;
     justify-items: center;
     align-items: center;
+    height: 25px;
+}
+
+.cardButtons > div {
+    display: none;
+}
+
+.bookCard:hover .cardButtons > div {
+    display: flex;
 }
 
 .cardButtons .material-symbols-outlined {

@@ -44,6 +44,7 @@ const closeWindow = () => {
 
   wrapper.removeChild(document.querySelector(".blurBg"));
   editActive = false;
+  checkbox.parentNode.style.display = "flex";
   bookName.value = "";
   author.value = "";
   pages.value = "";
@@ -114,11 +115,11 @@ const cardEdit = (e) => {
   let i = Number(e.parentNode.parentNode.getAttribute("dataindex"));
   editIndex = i;
 
+  editActive === true ? (checkbox.parentNode.style.display = "none") : null;
   formPopUp();
   bookName.value = myLibrary[i].addName;
   author.value = myLibrary[i].addAuthor;
   pages.value = myLibrary[i].addPages;
-  checkbox.checked = myLibrary[i].read;
 
   for (let i = 0; i < inputs.length; i++) {
     labels[i].classList.add("labelSmall");
@@ -146,6 +147,11 @@ const addBook = () => {
     newCard.children[0].textContent = `"${myLibrary[editIndex].addName}"`;
     newCard.children[1].textContent = myLibrary[editIndex].addAuthor;
     newCard.children[2].textContent = myLibrary[editIndex].addPages;
+    newCard.children[3].children[0].checked = myLibrary[editIndex].read;
+
+    myLibrary[editIndex].read === true
+      ? (newCard.children[3].children[1].textContent = "Read")
+      : (newCard.children[3].children[1].textContent.textContent = "Not Read");
 
     editActive = false;
     bookName.value = "";
