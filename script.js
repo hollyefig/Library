@@ -43,6 +43,13 @@ const closeWindow = () => {
   popWindow.classList.remove("display");
 
   wrapper.removeChild(document.querySelector(".blurBg"));
+  editActive = false;
+  bookName.value = "";
+  author.value = "";
+  pages.value = "";
+  for (let i = 0; i < inputs.length; i++) {
+    labels[i].classList.remove("labelSmall");
+  }
 };
 
 doc.addEventListener("keydown", (e) => {
@@ -111,6 +118,7 @@ const cardEdit = (e) => {
   bookName.value = myLibrary[i].addName;
   author.value = myLibrary[i].addAuthor;
   pages.value = myLibrary[i].addPages;
+  checkbox.checked = myLibrary[i].read;
 
   for (let i = 0; i < inputs.length; i++) {
     labels[i].classList.add("labelSmall");
@@ -129,6 +137,7 @@ const deleteCard = (e) => {
 // adding book
 const addBook = () => {
   if (editActive === true) {
+    console.log("edit active?");
     let newCard = document.querySelectorAll(".bookCard")[editIndex].children[1];
     myLibrary[editIndex].addName = bookName.value;
     myLibrary[editIndex].addAuthor = author.value;
@@ -139,6 +148,9 @@ const addBook = () => {
     newCard.children[2].textContent = myLibrary[editIndex].addPages;
 
     editActive = false;
+    bookName.value = "";
+    author.value = "";
+    pages.value = "";
   } else {
     let addedBook = new newBook(
       bookName.value,
