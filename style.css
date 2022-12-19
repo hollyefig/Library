@@ -552,6 +552,10 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .cardButtons > div {
+        display: flex;
+    }
+
 }
 
 @media only screen and (max-width:425px) {
