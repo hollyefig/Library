@@ -143,7 +143,7 @@ const addBook = () => {
     myLibrary[editIndex].addAuthor = author.value;
     myLibrary[editIndex].addPages = pages.value;
 
-    newCard.children[0].textContent = myLibrary[editIndex].addName;
+    newCard.children[0].textContent = `"${myLibrary[editIndex].addName}"`;
     newCard.children[1].textContent = myLibrary[editIndex].addAuthor;
     newCard.children[2].textContent = myLibrary[editIndex].addPages;
 
