@@ -133,6 +133,13 @@ const deleteCard = (e) => {
   bookShelf.removeChild(e.parentNode.parentNode);
   const filter = myLibrary.filter((obj) => obj.index !== i);
   myLibrary = filter;
+
+  // update id number on array and in element
+  let allNodes = document.querySelectorAll(".bookCard");
+  for (let i = 0; i < myLibrary.length; i++) {
+    myLibrary[i].index = i;
+    allNodes[i].setAttribute("dataindex", i);
+  }
 };
 
 // adding book
